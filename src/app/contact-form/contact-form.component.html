@@ -1,0 +1,31 @@
+<h2>@if (contact) {
+	Editar
+} @else {
+	Nuevo
+} contacto</h2>
+
+@if (form) {
+	<form [formGroup]="form" (ngSubmit)="save()">
+		<div>
+			<label for="name">Nombre</label>
+			<input type="text" id="name" formControlName="name" placeholder="Nombre">
+			@if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+				<p>El nombre es requerido</p>
+			}
+		</div>
+		<div>
+			<label for="email">Email</label>
+			<input type="email" id="email" formControlName="email" placeholder="Email">
+			@if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+				<p>El email es requerido</p>
+			}
+			@if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+				<p>El email es inválido</p>
+			}
+		</div>
+		<div>
+			<button routerLink="/">Atrás</button>
+			<button>Guardar</button>
+		</div>
+	</form>
+}
